@@ -10,7 +10,7 @@ public class Application {
     //An example
 
     public static void main(String[] args) throws SQLException {
-        LinoConfig config = new LinoConfig("host", "user", "password");
+        LinoConfig config = new LinoConfig("host", "user", "password", 5);
         PgLinoListener listener = new PgLinoListener("test", config);
         listener.addHandler(new LinoHandler() {
             @Override

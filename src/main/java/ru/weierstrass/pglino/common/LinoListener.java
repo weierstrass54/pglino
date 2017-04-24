@@ -20,11 +20,11 @@ public abstract class LinoListener<E extends Connection> {
 
     protected final String _name;
 
-    private LinoConfig _config;
-    private ScheduledExecutorService _keeper;
-    private Map<String, LinoHandler> _handlers;
-    protected Lock _lock;
-    protected ExecutorService _queue;
+    private final LinoConfig _config;
+    private final ScheduledExecutorService _keeper;
+    private final Map<String, LinoHandler> _handlers;
+    protected final Lock _lock;
+    protected final ExecutorService _queue;
     protected E _connection;
 
     protected LinoListener(String name, LinoConfig config) {
@@ -33,9 +33,8 @@ public abstract class LinoListener<E extends Connection> {
         _handlers = new ConcurrentHashMap<>();
         _lock = new ReentrantLock();
         _log.debug("Initializing {} queue.", name);
-        _queue = Executors
-            .newSingleThreadExecutor(
-                (r) -> new Thread(r, "Lino " + name + " queue"));
+        _queue = Executors.newFixedThreadPool(config.getThreadCount(),
+            (r) -> new Thread(r, "Lino " + name + " queue"));
         _log.debug("Initializing {} keeper.", name);
         _keeper = Executors.newSingleThreadScheduledExecutor(
             (r) -> new Thread(r, "Lino " + name + " keeper"));

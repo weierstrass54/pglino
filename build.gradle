@@ -4,6 +4,7 @@ version '0.1-SNAPSHOT'
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'application'
+apply plugin: 'maven-publish'
 
 mainClassName = "ru.weierstrass.pglino.Application"
 

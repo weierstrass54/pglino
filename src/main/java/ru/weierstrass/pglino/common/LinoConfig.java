@@ -8,10 +8,17 @@ public class LinoConfig {
     private final String _user;
     private final String _password;
 
-    public LinoConfig(String host, String user, String password) {
+    private final int _threadCount;
+
+    public LinoConfig(String host, String user, String password, int threadCount) {
         this._host = host;
         this._user = user;
         this._password = password;
+        this._threadCount = threadCount;
+    }
+
+    public LinoConfig(String host, String user, String password) {
+        this(host, user, password, 1);
     }
 
     String getHost() {
@@ -23,6 +30,10 @@ public class LinoConfig {
         auth.put("user", this._user);
         auth.put("password", this._password);
         return auth;
+    }
+
+    int getThreadCount() {
+        return this._threadCount;
     }
 
 }
