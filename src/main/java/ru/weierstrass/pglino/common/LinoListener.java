@@ -49,6 +49,7 @@ public abstract class LinoListener<E extends Connection> {
 
     public void addHandler(LinoHandler handler) {
         _handlers.put(handler.getChannel(), handler);
+        addNotificationListener(handler.getChannel(), handler);
     }
 
     public void removeHandler(String name) {
